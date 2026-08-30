@@ -1,0 +1,10 @@
+# Project exclude paths
+/api/src/scrapper/entities/scrapper.entity.js
+/api/src/scrapper/scrapper.controller.js
+/api/src/scrapper/scrapper.module.js
+/api/src/scrapper/scrapper.service.js
+/api/src/app.controller.js
+/api/src/app.module.js
+/api/src/app.service.js
+/api/src/database.module.js
+/api/src/main.js

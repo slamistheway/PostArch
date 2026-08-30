@@ -1,0 +1,23 @@
+{
+  "name": "postarchiver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix frontend\" \"npm run start:dev --prefix api\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "concurrently": "^10.0.3"
+  },
+  "dependencies": {
+    "@fortawesome/angular-fontawesome": "5.1.0",
+    "@fortawesome/fontawesome-svg-core": "7.3.1",
+    "@fortawesome/free-solid-svg-icons": "7.3.1",
+    "@nestjs/serve-static": "5.0.5",
+    "puppeteer-extra-plugin-stealth": "2.11.2"
+  }
+}

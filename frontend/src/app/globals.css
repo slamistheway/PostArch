@@ -1,0 +1,104 @@
+@import 'tailwindcss';
+
+:root {
+    --color-navbar: #bbc3bd;
+    --color-navbar-hover: #991b1b;
+
+    --color-footer: #7f1d1d;
+    --color-footer-text: white;
+    --color-footerLink-text: gray;
+    --color-footerLinkHover-text: white;
+
+
+    --color-otherDivs: white ;
+    --color-otherDivs-text: #7f1d1d;
+    --color-otherDivsAltText-text: red;
+
+    --color-accent: #bf0000;
+    --color-accent-hover: #ef4444;
+    --color-accent-soft: #fef2f2;
+
+    --color-surface: #ffffff;
+    --color-surface-muted: #f8fafc;
+
+    --color-selectedListItem: #f19292;
+
+    --color-text: black;
+    --color-white-text: white;
+    --color-text-muted: #4b5563;
+
+    --border-color: #bebfc5;
+}
+
+*{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
+}
+
+/*--------------- HTML ELEMENTS ---------------*/
+button{
+    cursor: pointer;
+}
+
+
+/*--------------- CUSTOM CLASSES ---------------*/
+.button_gradient_green{
+    background:
+            radial-gradient(circle at 50% 30%, rgba(255,255,255,.45), transparent 55%), /* HORIZONTAL GRADIENT */
+            linear-gradient(to bottom, #b9ef69 0%, #8fd848 18%, #69bb35 48%, #5aa92c 52%, #84d643 82%, #b4ee66 100%); /* VERTICAL GRADIENT */
+}
+
+.button_gradient_green p, .button_gradient_green span {
+    filter: drop-shadow(0 1px 1px rgba(30, 60, 25, 0.8));
+    color: #edf7e6;
+}
+
+.button_gradient_silver{
+    background:
+            radial-gradient(circle at 50% 30%, rgba(255,255,255,.45), transparent 55%), /* HORIZONTAL GRADIENT */
+            linear-gradient(to bottom, #e0e0e0 0%, #cfcfcf 18%, #bdbdbd 48%, #b3b3b3 52%, #d1d1d1 82%, #e5e5e5 100%); /* VERTICAL GRADIENT */
+}
+
+
+.top-gloss-button {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    top: 2px;
+    height: 30%;
+    border-radius: 9999px;
+    background: linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.9) 0%,
+            rgba(255, 255, 255, 0.45) 55%,
+            rgba(255, 255, 255, 0) 100%
+    );
+}
+
+.full-gloss-button {
+    position: absolute;
+    inset: 2px;
+    border-radius: 9999px;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.25);
+}
+
+.top-gloss-button-round {
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 100%;
+    height: 50%;
+    border-top-left-radius: 9999px;
+    border-top-right-radius: 9999px;
+    background: linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(255, 255, 255, 0) 100%
+    );
+}
+
+
+input::placeholder {
+    color: #bebfc5;
+}
+

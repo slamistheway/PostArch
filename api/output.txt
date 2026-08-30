@@ -1,0 +1,271 @@
+2026-09-03 17:47:46,178 - DEBUG - [youtube] Extracting URL: https://www.youtube.com/shorts/593JxS79_to/
+2026-09-03 17:47:46,178 - DEBUG - [youtube] 593JxS79_to: Downloading webpage
+2026-09-03 17:47:47,337 - DEBUG - [youtube] 593JxS79_to: Downloading android vr player API JSON
+2026-09-03 17:47:47,569 - DEBUG - [info] 593JxS79_to: Downloading 1 format(s): 398+251
+2026-09-03 17:47:47,641 - DEBUG - [download] Destination: You Aint Nothing But a Hound Dog [593JxS79_to].f398.mp4
+2026-09-03 17:47:47,641 - DEBUG - [download]   0.0% of    4.53MiB at  Unknown B/s ETA Unknown
+2026-09-03 17:47:47,642 - DEBUG - [download]   0.1% of    4.53MiB at  Unknown B/s ETA Unknown
+2026-09-03 17:47:47,642 - DEBUG - [download]   0.2% of    4.53MiB at  Unknown B/s ETA Unknown
+2026-09-03 17:47:47,642 - DEBUG - [download]   0.3% of    4.53MiB at   14.18MiB/s ETA 00:00
+2026-09-03 17:47:47,647 - DEBUG - [download]   0.7% of    4.53MiB at    5.15MiB/s ETA 00:00
+2026-09-03 17:47:47,653 - DEBUG - [download]   1.4% of    4.53MiB at    5.02MiB/s ETA 00:00
+2026-09-03 17:47:47,658 - DEBUG - [download]   2.7% of    4.53MiB at    7.48MiB/s ETA 00:00
+2026-09-03 17:47:47,664 - DEBUG - [download]   5.5% of    4.53MiB at   11.00MiB/s ETA 00:00
+2026-09-03 17:47:47,673 - DEBUG - [download]  11.0% of    4.53MiB at   15.55MiB/s ETA 00:00
+2026-09-03 17:47:47,681 - DEBUG - [download]  22.0% of    4.53MiB at   25.23MiB/s ETA 00:00
+2026-09-03 17:47:47,692 - DEBUG - [download]  44.1% of    4.53MiB at   39.25MiB/s ETA 00:00
+2026-09-03 17:47:47,712 - DEBUG - [download]  88.2% of    4.53MiB at   56.06MiB/s ETA 00:00
+2026-09-03 17:47:47,739 - DEBUG - [download] 100.0% of    4.53MiB at   46.48MiB/s ETA 00:00
+2026-09-03 17:47:47,740 - DEBUG - [download] 100% of    4.53MiB in 00:00:00 at 27.87MiB/s
+2026-09-03 17:47:47,778 - DEBUG - [download] Destination: You Aint Nothing But a Hound Dog [593JxS79_to].f251.webm
+2026-09-03 17:47:47,778 - DEBUG - [download]   0.2% of  433.33KiB at  Unknown B/s ETA Unknown
+2026-09-03 17:47:47,782 - DEBUG - [download]   0.7% of  433.33KiB at  617.81KiB/s ETA 00:00
+2026-09-03 17:47:47,782 - DEBUG - [download]   1.6% of  433.33KiB at    1.35MiB/s ETA 00:00
+2026-09-03 17:47:47,783 - DEBUG - [download]   3.5% of  433.33KiB at    2.82MiB/s ETA 00:00
+2026-09-03 17:47:47,783 - DEBUG - [download]   7.2% of  433.33KiB at    5.61MiB/s ETA 00:00
+2026-09-03 17:47:47,783 - DEBUG - [download]  14.5% of  433.33KiB at   10.95MiB/s ETA 00:00
+2026-09-03 17:47:47,783 - DEBUG - [download]  29.3% of  433.33KiB at   21.15MiB/s ETA 00:00
+2026-09-03 17:47:47,784 - DEBUG - [download]  58.8% of  433.33KiB at   39.26MiB/s ETA 00:00
+2026-09-03 17:47:47,784 - DEBUG - [download] 100.0% of  433.33KiB at   61.55MiB/s ETA 00:00
+2026-09-03 17:47:47,785 - DEBUG - [download] 100% of  433.33KiB in 00:00:00 at 9.40MiB/s
+2026-09-03 17:47:47,789 - DEBUG - [Merger] Merging formats into "You Aint Nothing But a Hound Dog [593JxS79_to].webm"
+2026-09-03 17:47:47,833 - DEBUG - Deleting original file You Aint Nothing But a Hound Dog [593JxS79_to].f251.webm (pass -k to keep)
+2026-09-03 17:47:47,833 - DEBUG - Deleting original file You Aint Nothing But a Hound Dog [593JxS79_to].f398.mp4 (pass -k to keep)
+2026-09-03 17:47:57,902 - DEBUG - [youtube] Extracting URL: https://www.youtube.com/shorts/593JxS79_to/
+2026-09-03 17:47:57,902 - DEBUG - [youtube] 593JxS79_to: Downloading webpage
+2026-09-03 17:47:58,912 - DEBUG - [youtube] 593JxS79_to: Downloading android vr player API JSON
+2026-09-03 17:47:59,142 - DEBUG - [info] 593JxS79_to: Downloading 1 format(s): 398+251
+2026-09-03 17:47:59,173 - DEBUG - [download] Destination: You Aint Nothing But a Hound Dog [593JxS79_to].f398.mp4
+2026-09-03 17:47:59,173 - DEBUG - [download]   0.0% of    4.53MiB at  407.53KiB/s ETA 00:11
+2026-09-03 17:47:59,174 - DEBUG - [download]   0.1% of    4.53MiB at    1.04MiB/s ETA 00:04
+2026-09-03 17:47:59,174 - DEBUG - [download]   0.2% of    4.53MiB at    2.31MiB/s ETA 00:01
+2026-09-03 17:47:59,174 - DEBUG - [download]   0.3% of    4.53MiB at    4.76MiB/s ETA 00:00
+2026-09-03 17:47:59,176 - DEBUG - [download]   0.7% of    4.53MiB at    5.53MiB/s ETA 00:00
+2026-09-03 17:47:59,182 - DEBUG - [download]   1.4% of    4.53MiB at    5.47MiB/s ETA 00:00
+2026-09-03 17:47:59,187 - DEBUG - [download]   2.7% of    4.53MiB at    7.90MiB/s ETA 00:00
+2026-09-03 17:47:59,194 - DEBUG - [download]   5.5% of    4.53MiB at   10.89MiB/s ETA 00:00
+2026-09-03 17:47:59,200 - DEBUG - [download]  11.0% of    4.53MiB at   17.19MiB/s ETA 00:00
+2026-09-03 17:47:59,209 - DEBUG - [download]  22.0% of    4.53MiB at   26.01MiB/s ETA 00:00
+2026-09-03 17:47:59,222 - DEBUG - [download]  44.1% of    4.53MiB at   38.88MiB/s ETA 00:00
+2026-09-03 17:47:59,243 - DEBUG - [download]  88.2% of    4.53MiB at   55.68MiB/s ETA 00:00
+2026-09-03 17:47:59,247 - DEBUG - [download] 100.0% of    4.53MiB at   59.43MiB/s ETA 00:00
+2026-09-03 17:47:59,248 - DEBUG - [download] 100% of    4.53MiB in 00:00:00 at 46.20MiB/s
+2026-09-03 17:47:59,260 - DEBUG - [download] Destination: You Aint Nothing But a Hound Dog [593JxS79_to].f251.webm
+2026-09-03 17:47:59,260 - DEBUG - [download]   0.2% of  433.33KiB at  Unknown B/s ETA Unknown
+2026-09-03 17:47:59,265 - DEBUG - [download]   0.7% of  433.33KiB at  600.47KiB/s ETA 00:00
+2026-09-03 17:47:59,265 - DEBUG - [download]   1.6% of  433.33KiB at    1.31MiB/s ETA 00:00
+2026-09-03 17:47:59,265 - DEBUG - [download]   3.5% of  433.33KiB at    2.73MiB/s ETA 00:00
+2026-09-03 17:47:59,265 - DEBUG - [download]   7.2% of  433.33KiB at    5.46MiB/s ETA 00:00
+2026-09-03 17:47:59,265 - DEBUG - [download]  14.5% of  433.33KiB at   10.79MiB/s ETA 00:00
+2026-09-03 17:47:59,265 - DEBUG - [download]  29.3% of  433.33KiB at   21.17MiB/s ETA 00:00
+2026-09-03 17:47:59,266 - DEBUG - [download]  58.8% of  433.33KiB at   39.34MiB/s ETA 00:00
+2026-09-03 17:47:59,266 - DEBUG - [download] 100.0% of  433.33KiB at   62.56MiB/s ETA 00:00
+2026-09-03 17:47:59,268 - DEBUG - [download] 100% of  433.33KiB in 00:00:00 at 22.53MiB/s
+2026-09-03 17:47:59,271 - DEBUG - [Merger] Merging formats into "You Aint Nothing But a Hound Dog [593JxS79_to].webm"
+2026-09-03 17:47:59,314 - DEBUG - Deleting original file You Aint Nothing But a Hound Dog [593JxS79_to].f251.webm (pass -k to keep)
+2026-09-03 17:47:59,315 - DEBUG - Deleting original file You Aint Nothing But a Hound Dog [593JxS79_to].f398.mp4 (pass -k to keep)
+2026-09-03 17:48:41,627 - DEBUG - [youtube] Extracting URL: https://www.youtube.com/shorts/593JxS79_to/
+2026-09-03 17:48:41,627 - DEBUG - [youtube] 593JxS79_to: Downloading webpage
+2026-09-03 17:48:42,823 - DEBUG - [youtube] 593JxS79_to: Downloading android vr player API JSON
+2026-09-03 17:48:43,064 - DEBUG - [info] 593JxS79_to: Downloading 1 format(s): 398+140
+2026-09-03 17:48:43,143 - DEBUG - [download] Destination: You Aint Nothing But a Hound Dog [593JxS79_to].f398.mp4
+2026-09-03 17:48:43,143 - DEBUG - [download]   0.0% of    4.53MiB at  Unknown B/s ETA Unknown
+2026-09-03 17:48:43,143 - DEBUG - [download]   0.1% of    4.53MiB at  Unknown B/s ETA Unknown
+2026-09-03 17:48:43,143 - DEBUG - [download]   0.2% of    4.53MiB at  Unknown B/s ETA Unknown
+2026-09-03 17:48:43,143 - DEBUG - [download]   0.3% of    4.53MiB at  Unknown B/s ETA Unknown
+2026-09-03 17:48:43,148 - DEBUG - [download]   0.7% of    4.53MiB at    5.23MiB/s ETA 00:00
+2026-09-03 17:48:43,154 - DEBUG - [download]   1.4% of    4.53MiB at    5.24MiB/s ETA 00:00
+2026-09-03 17:48:43,161 - DEBUG - [download]   2.7% of    4.53MiB at    6.89MiB/s ETA 00:00
+2026-09-03 17:48:43,167 - DEBUG - [download]   5.5% of    4.53MiB at   10.05MiB/s ETA 00:00
+2026-09-03 17:48:43,173 - DEBUG - [download]  11.0% of    4.53MiB at   16.19MiB/s ETA 00:00
+2026-09-03 17:48:43,183 - DEBUG - [download]  22.0% of    4.53MiB at   24.52MiB/s ETA 00:00
+2026-09-03 17:48:43,195 - DEBUG - [download]  44.1% of    4.53MiB at   38.23MiB/s ETA 00:00
+2026-09-03 17:48:43,245 - DEBUG - [download]  88.2% of    4.53MiB at   39.09MiB/s ETA 00:00
+2026-09-03 17:48:43,250 - DEBUG - [download] 100.0% of    4.53MiB at   42.04MiB/s ETA 00:00
+2026-09-03 17:48:43,252 - DEBUG - [download] 100% of    4.53MiB in 00:00:00 at 28.64MiB/s
+2026-09-03 17:48:43,458 - DEBUG - [download] Destination: You Aint Nothing But a Hound Dog [593JxS79_to].f140.m4a
+2026-09-03 17:48:43,459 - DEBUG - [download]   0.2% of  476.60KiB at  Unknown B/s ETA Unknown
+2026-09-03 17:48:43,459 - DEBUG - [download]   0.6% of  476.60KiB at  Unknown B/s ETA Unknown
+2026-09-03 17:48:43,459 - DEBUG - [download]   1.5% of  476.60KiB at  Unknown B/s ETA Unknown
+2026-09-03 17:48:43,459 - DEBUG - [download]   3.1% of  476.60KiB at  Unknown B/s ETA Unknown
+2026-09-03 17:48:43,463 - DEBUG - [download]   6.5% of  476.60KiB at    5.76MiB/s ETA 00:00
+2026-09-03 17:48:43,464 - DEBUG - [download]  13.2% of  476.60KiB at   11.19MiB/s ETA 00:00
+2026-09-03 17:48:43,464 - DEBUG - [download]  26.6% of  476.60KiB at   21.82MiB/s ETA 00:00
+2026-09-03 17:48:43,471 - DEBUG - [download]  53.5% of  476.60KiB at   19.37MiB/s ETA 00:00
+2026-09-03 17:48:43,498 - DEBUG - [download] 100.0% of  476.60KiB at   11.81MiB/s ETA 00:00
+2026-09-03 17:48:43,499 - DEBUG - [download] 100% of  476.60KiB in 00:00:00 at 1.89MiB/s
+2026-09-03 17:48:43,503 - DEBUG - [Merger] Merging formats into "You Aint Nothing But a Hound Dog [593JxS79_to].mp4"
+2026-09-03 17:48:43,562 - DEBUG - Deleting original file You Aint Nothing But a Hound Dog [593JxS79_to].f140.m4a (pass -k to keep)
+2026-09-03 17:48:43,563 - DEBUG - Deleting original file You Aint Nothing But a Hound Dog [593JxS79_to].f398.mp4 (pass -k to keep)
+2026-09-03 18:10:42,009 - DEBUG - [youtube] Extracting URL: https://www.youtube.com/shorts/593JxS79_to/
+2026-09-03 18:10:42,009 - DEBUG - [youtube] 593JxS79_to: Downloading webpage
+2026-09-03 18:10:43,363 - DEBUG - [youtube] 593JxS79_to: Downloading android vr player API JSON
+2026-09-03 18:10:43,548 - DEBUG - [info] 593JxS79_to: Downloading 1 format(s): 398+140
+2026-09-03 18:10:43,556 - DEBUG - [download] You Aint Nothing But a Hound Dog [593JxS79_to].mp4 has already been downloaded
+2026-09-03 18:22:28,528 - DEBUG - [youtube] Extracting URL: https://www.youtube.com/shorts/593JxS79_to/
+2026-09-03 18:22:28,528 - DEBUG - [youtube] 593JxS79_to: Downloading webpage
+2026-09-03 18:22:29,389 - DEBUG - [youtube] 593JxS79_to: Downloading android vr player API JSON
+2026-09-03 18:22:29,595 - DEBUG - [info] 593JxS79_to: Downloading 1 format(s): 398+140
+2026-09-03 18:22:29,679 - DEBUG - [download] Destination: You Aint Nothing But a Hound Dog [593JxS79_to].f398.mp4
+2026-09-03 18:22:29,680 - DEBUG - [download]   0.0% of    4.53MiB at  Unknown B/s ETA Unknown
+2026-09-03 18:22:29,680 - DEBUG - [download]   0.1% of    4.53MiB at  Unknown B/s ETA Unknown
+2026-09-03 18:22:29,680 - DEBUG - [download]   0.2% of    4.53MiB at    6.45MiB/s ETA 00:00
+2026-09-03 18:22:29,680 - DEBUG - [download]   0.3% of    4.53MiB at   12.39MiB/s ETA 00:00
+2026-09-03 18:22:29,685 - DEBUG - [download]   0.7% of    4.53MiB at    5.50MiB/s ETA 00:00
+2026-09-03 18:22:29,690 - DEBUG - [download]   1.4% of    4.53MiB at    5.42MiB/s ETA 00:00
+2026-09-03 18:22:29,695 - DEBUG - [download]   2.7% of    4.53MiB at    7.70MiB/s ETA 00:00
+2026-09-03 18:22:29,702 - DEBUG - [download]   5.5% of    4.53MiB at   10.57MiB/s ETA 00:00
+2026-09-03 18:22:29,709 - DEBUG - [download]  11.0% of    4.53MiB at   16.64MiB/s ETA 00:00
+2026-09-03 18:22:29,719 - DEBUG - [download]  22.0% of    4.53MiB at   24.90MiB/s ETA 00:00
+2026-09-03 18:22:29,730 - DEBUG - [download]  44.1% of    4.53MiB at   38.88MiB/s ETA 00:00
+2026-09-03 18:22:29,751 - DEBUG - [download]  88.2% of    4.53MiB at   55.20MiB/s ETA 00:00
+2026-09-03 18:22:29,756 - DEBUG - [download] 100.0% of    4.53MiB at   59.05MiB/s ETA 00:00
+2026-09-03 18:22:29,757 - DEBUG - [download] 100% of    4.53MiB in 00:00:00 at 34.84MiB/s
+2026-09-03 18:22:29,802 - DEBUG - [download] Destination: You Aint Nothing But a Hound Dog [593JxS79_to].f140.m4a
+2026-09-03 18:22:29,802 - DEBUG - [download]   0.2% of  476.60KiB at  Unknown B/s ETA Unknown
+2026-09-03 18:22:29,802 - DEBUG - [download]   0.6% of  476.60KiB at  Unknown B/s ETA Unknown
+2026-09-03 18:22:29,802 - DEBUG - [download]   1.5% of  476.60KiB at  Unknown B/s ETA Unknown
+2026-09-03 18:22:29,802 - DEBUG - [download]   3.1% of  476.60KiB at   14.29MiB/s ETA 00:00
+2026-09-03 18:22:29,807 - DEBUG - [download]   6.5% of  476.60KiB at    5.73MiB/s ETA 00:00
+2026-09-03 18:22:29,807 - DEBUG - [download]  13.2% of  476.60KiB at   11.11MiB/s ETA 00:00
+2026-09-03 18:22:29,807 - DEBUG - [download]  26.6% of  476.60KiB at   21.57MiB/s ETA 00:00
+2026-09-03 18:22:29,807 - DEBUG - [download]  53.5% of  476.60KiB at   40.50MiB/s ETA 00:00
+2026-09-03 18:22:29,808 - DEBUG - [download] 100.0% of  476.60KiB at   69.88MiB/s ETA 00:00
+2026-09-03 18:22:29,809 - DEBUG - [download] 100% of  476.60KiB in 00:00:00 at 9.02MiB/s
+2026-09-03 18:22:29,812 - DEBUG - [Merger] Merging formats into "You Aint Nothing But a Hound Dog [593JxS79_to].mp4"
+2026-09-03 18:22:29,868 - DEBUG - Deleting original file You Aint Nothing But a Hound Dog [593JxS79_to].f398.mp4 (pass -k to keep)
+2026-09-03 18:22:29,869 - DEBUG - Deleting original file You Aint Nothing But a Hound Dog [593JxS79_to].f140.m4a (pass -k to keep)
+2026-09-03 18:22:56,870 - DEBUG - [youtube] Extracting URL: https://www.youtube.com/shorts/593JxS79_to/
+2026-09-03 18:22:56,870 - DEBUG - [youtube] 593JxS79_to: Downloading webpage
+2026-09-03 18:22:57,840 - DEBUG - [youtube] 593JxS79_to: Downloading android vr player API JSON
+2026-09-03 18:22:58,039 - DEBUG - [info] 593JxS79_to: Downloading 1 format(s): 398+140
+2026-09-03 18:22:58,047 - DEBUG - [download] You Aint Nothing But a Hound Dog [593JxS79_to].mp4 has already been downloaded
+2026-09-03 18:23:44,458 - DEBUG - [youtube] Extracting URL: https://www.youtube.com/shorts/593JxS79_to/
+2026-09-03 18:23:44,458 - DEBUG - [youtube] 593JxS79_to: Downloading webpage
+2026-09-03 18:23:45,685 - DEBUG - [youtube] 593JxS79_to: Downloading android vr player API JSON
+2026-09-03 18:23:45,885 - DEBUG - [info] 593JxS79_to: Downloading 1 format(s): 398+140
+2026-09-03 18:23:45,892 - DEBUG - [download] You Aint Nothing But a Hound Dog [593JxS79_to].mp4 has already been downloaded
+2026-09-03 18:24:21,560 - DEBUG - [youtube] Extracting URL: https://www.youtube.com/shorts/593JxS79_to/
+2026-09-03 18:24:21,561 - DEBUG - [youtube] 593JxS79_to: Downloading webpage
+2026-09-03 18:24:22,478 - DEBUG - [youtube] Extracting URL: https://www.youtube.com/shorts/593JxS79_to/
+2026-09-03 18:24:22,479 - DEBUG - [youtube] 593JxS79_to: Downloading webpage
+2026-09-03 18:24:22,845 - DEBUG - [youtube] 593JxS79_to: Downloading android vr player API JSON
+2026-09-03 18:24:23,040 - DEBUG - [info] 593JxS79_to: Downloading 1 format(s): 398+140
+2026-09-03 18:24:23,048 - DEBUG - [download] You Aint Nothing But a Hound Dog [593JxS79_to].mp4 has already been downloaded
+2026-09-03 18:24:23,926 - DEBUG - [youtube] 593JxS79_to: Downloading android vr player API JSON
+2026-09-03 18:24:24,128 - DEBUG - [info] 593JxS79_to: Downloading 1 format(s): 398+140
+2026-09-03 18:24:24,136 - DEBUG - [download] You Aint Nothing But a Hound Dog [593JxS79_to].mp4 has already been downloaded
+2026-09-03 19:00:01,991 - DEBUG - [youtube] Extracting URL: https://www.youtube.com/shorts/593JxS79_to/
+2026-09-03 19:00:01,991 - DEBUG - [youtube] 593JxS79_to: Downloading webpage
+2026-09-03 19:00:03,121 - DEBUG - [youtube] 593JxS79_to: Downloading android vr player API JSON
+2026-09-03 19:00:03,314 - DEBUG - [info] 593JxS79_to: Downloading 1 format(s): 398+140
+2026-09-03 19:00:03,325 - DEBUG - [download] You Aint Nothing But a Hound Dog [593JxS79_to].mp4 has already been downloaded
+2026-09-03 19:00:03,334 - ERROR - ERROR: No suitable extractor (uploader) found for URL https://www.youtube.com/shorts/593JxS79_to/
+2026-09-03 19:04:30,920 - DEBUG - [youtube] Extracting URL: https://www.youtube.com/shorts/593JxS79_to/
+2026-09-03 19:04:30,920 - DEBUG - [youtube] 593JxS79_to: Downloading webpage
+2026-09-03 19:04:31,992 - DEBUG - [youtube] 593JxS79_to: Downloading android vr player API JSON
+2026-09-03 19:04:32,322 - DEBUG - [youtube] Extracting URL: https://www.youtube.com/shorts/593JxS79_to/
+2026-09-03 19:04:32,323 - DEBUG - [youtube] 593JxS79_to: Downloading webpage
+2026-09-03 19:04:33,440 - DEBUG - [youtube] 593JxS79_to: Downloading android vr player API JSON
+2026-09-03 19:04:33,701 - DEBUG - [info] 593JxS79_to: Downloading 1 format(s): 398+140
+2026-09-03 19:04:33,778 - DEBUG - [download] Destination: You Aint Nothing But a Hound Dog_20260903_190430.f398.mp4
+2026-09-03 19:04:33,778 - DEBUG - [download]   0.0% of    4.53MiB at  Unknown B/s ETA Unknown
+2026-09-03 19:04:33,778 - DEBUG - [download]   0.1% of    4.53MiB at  Unknown B/s ETA Unknown
+2026-09-03 19:04:33,779 - DEBUG - [download]   0.2% of    4.53MiB at    5.83MiB/s ETA 00:00
+2026-09-03 19:04:33,779 - DEBUG - [download]   0.3% of    4.53MiB at   10.52MiB/s ETA 00:00
+2026-09-03 19:04:33,784 - DEBUG - [download]   0.7% of    4.53MiB at    4.72MiB/s ETA 00:00
+2026-09-03 19:04:33,790 - DEBUG - [download]   1.4% of    4.53MiB at    4.84MiB/s ETA 00:00
+2026-09-03 19:04:33,795 - DEBUG - [download]   2.7% of    4.53MiB at    7.14MiB/s ETA 00:00
+2026-09-03 19:04:33,802 - DEBUG - [download]   5.5% of    4.53MiB at    9.97MiB/s ETA 00:00
+2026-09-03 19:04:33,809 - DEBUG - [download]  11.0% of    4.53MiB at   15.66MiB/s ETA 00:00
+2026-09-03 19:04:33,818 - DEBUG - [download]  22.0% of    4.53MiB at   24.93MiB/s ETA 00:00
+2026-09-03 19:04:33,831 - DEBUG - [download]  44.1% of    4.53MiB at   37.25MiB/s ETA 00:00
+2026-09-03 19:04:33,854 - DEBUG - [download]  88.2% of    4.53MiB at   52.36MiB/s ETA 00:00
+2026-09-03 19:04:33,859 - DEBUG - [download] 100.0% of    4.53MiB at   55.51MiB/s ETA 00:00
+2026-09-03 19:04:33,860 - DEBUG - [download] 100% of    4.53MiB in 00:00:00 at 29.57MiB/s
+2026-09-03 19:04:33,899 - DEBUG - [download] Destination: You Aint Nothing But a Hound Dog_20260903_190430.f140.m4a
+2026-09-03 19:04:33,899 - DEBUG - [download]   0.2% of  476.60KiB at  Unknown B/s ETA Unknown
+2026-09-03 19:04:33,900 - DEBUG - [download]   0.6% of  476.60KiB at  Unknown B/s ETA Unknown
+2026-09-03 19:04:33,900 - DEBUG - [download]   1.5% of  476.60KiB at    6.13MiB/s ETA 00:00
+2026-09-03 19:04:33,900 - DEBUG - [download]   3.1% of  476.60KiB at   11.52MiB/s ETA 00:00
+2026-09-03 19:04:33,900 - DEBUG - [download]   6.5% of  476.60KiB at   18.99MiB/s ETA 00:00
+2026-09-03 19:04:33,901 - DEBUG - [download]  13.2% of  476.60KiB at   34.08MiB/s ETA 00:00
+2026-09-03 19:04:33,901 - DEBUG - [download]  26.6% of  476.60KiB at   62.19MiB/s ETA 00:00
+2026-09-03 19:04:33,901 - DEBUG - [download]  53.5% of  476.60KiB at  103.56MiB/s ETA 00:00
+2026-09-03 19:04:33,904 - DEBUG - [download] 100.0% of  476.60KiB at   86.00MiB/s ETA 00:00
+2026-09-03 19:04:33,905 - DEBUG - [download] 100% of  476.60KiB in 00:00:00 at 10.46MiB/s
+2026-09-03 19:04:33,910 - DEBUG - [Merger] Merging formats into "You Aint Nothing But a Hound Dog_20260903_190430.mp4"
+2026-09-03 19:04:33,964 - DEBUG - Deleting original file You Aint Nothing But a Hound Dog_20260903_190430.f398.mp4 (pass -k to keep)
+2026-09-03 19:04:33,965 - DEBUG - Deleting original file You Aint Nothing But a Hound Dog_20260903_190430.f140.m4a (pass -k to keep)
+2026-09-03 19:21:16,269 - DEBUG - [youtube] Extracting URL: https://www.youtube.com/shorts/593JxS79_to
+2026-09-03 19:21:16,270 - DEBUG - [youtube] 593JxS79_to: Downloading webpage
+2026-09-03 19:21:17,289 - DEBUG - [youtube] 593JxS79_to: Downloading android vr player API JSON
+2026-09-03 19:21:17,516 - DEBUG - [youtube] Extracting URL: https://www.youtube.com/shorts/593JxS79_to
+2026-09-03 19:21:17,516 - DEBUG - [youtube] 593JxS79_to: Downloading webpage
+2026-09-03 19:21:18,780 - DEBUG - [youtube] 593JxS79_to: Downloading android vr player API JSON
+2026-09-03 19:21:18,985 - DEBUG - [info] 593JxS79_to: Downloading 1 format(s): 398+140
+2026-09-03 19:21:19,047 - DEBUG - [download] Destination: You Aint Nothing But a Hound Dog_20260903_192116.f398.mp4
+2026-09-03 19:21:19,047 - DEBUG - [download]   0.0% of    4.53MiB at  Unknown B/s ETA Unknown
+2026-09-03 19:21:19,047 - DEBUG - [download]   0.1% of    4.53MiB at  Unknown B/s ETA Unknown
+2026-09-03 19:21:19,048 - DEBUG - [download]   0.2% of    4.53MiB at    6.68MiB/s ETA 00:00
+2026-09-03 19:21:19,048 - DEBUG - [download]   0.3% of    4.53MiB at   11.86MiB/s ETA 00:00
+2026-09-03 19:21:19,053 - DEBUG - [download]   0.7% of    4.53MiB at    5.10MiB/s ETA 00:00
+2026-09-03 19:21:19,055 - DEBUG - [download]   1.4% of    4.53MiB at    7.29MiB/s ETA 00:00
+2026-09-03 19:21:19,062 - DEBUG - [download]   2.7% of    4.53MiB at    8.19MiB/s ETA 00:00
+2026-09-03 19:21:19,069 - DEBUG - [download]   5.5% of    4.53MiB at   10.96MiB/s ETA 00:00
+2026-09-03 19:21:19,076 - DEBUG - [download]  11.0% of    4.53MiB at   16.90MiB/s ETA 00:00
+2026-09-03 19:21:19,084 - DEBUG - [download]  22.0% of    4.53MiB at   26.51MiB/s ETA 00:00
+2026-09-03 19:21:19,097 - DEBUG - [download]  44.1% of    4.53MiB at   39.50MiB/s ETA 00:00
+2026-09-03 19:21:19,124 - DEBUG - [download]  88.2% of    4.53MiB at   51.62MiB/s ETA 00:00
+2026-09-03 19:21:19,136 - DEBUG - [download] 100.0% of    4.53MiB at   50.60MiB/s ETA 00:00
+2026-09-03 19:21:19,138 - DEBUG - [download] 100% of    4.53MiB in 00:00:00 at 30.92MiB/s
+2026-09-03 19:21:19,197 - DEBUG - [download] Destination: You Aint Nothing But a Hound Dog_20260903_192116.f140.m4a
+2026-09-03 19:21:19,197 - DEBUG - [download]   0.2% of  476.60KiB at  Unknown B/s ETA Unknown
+2026-09-03 19:21:19,197 - DEBUG - [download]   0.6% of  476.60KiB at    2.56MiB/s ETA 00:00
+2026-09-03 19:21:19,197 - DEBUG - [download]   1.5% of  476.60KiB at    4.92MiB/s ETA 00:00
+2026-09-03 19:21:19,198 - DEBUG - [download]   3.1% of  476.60KiB at    9.05MiB/s ETA 00:00
+2026-09-03 19:21:19,198 - DEBUG - [download]   6.5% of  476.60KiB at   15.69MiB/s ETA 00:00
+2026-09-03 19:21:19,198 - DEBUG - [download]  13.2% of  476.60KiB at   27.42MiB/s ETA 00:00
+2026-09-03 19:21:19,199 - DEBUG - [download]  26.6% of  476.60KiB at   49.31MiB/s ETA 00:00
+2026-09-03 19:21:19,199 - DEBUG - [download]  53.5% of  476.60KiB at   82.84MiB/s ETA 00:00
+2026-09-03 19:21:19,203 - DEBUG - [download] 100.0% of  476.60KiB at   71.02MiB/s ETA 00:00
+2026-09-03 19:21:19,204 - DEBUG - [download] 100% of  476.60KiB in 00:00:00 at 7.06MiB/s
+2026-09-03 19:21:19,209 - DEBUG - [Merger] Merging formats into "You Aint Nothing But a Hound Dog_20260903_192116.mp4"
+2026-09-03 19:21:19,270 - DEBUG - Deleting original file You Aint Nothing But a Hound Dog_20260903_192116.f140.m4a (pass -k to keep)
+2026-09-03 19:21:19,270 - DEBUG - Deleting original file You Aint Nothing But a Hound Dog_20260903_192116.f398.mp4 (pass -k to keep)
+2026-09-03 19:23:07,280 - DEBUG - [youtube] Extracting URL: https://www.youtube.com/shorts/593JxS79_to
+2026-09-03 19:23:07,280 - DEBUG - [youtube] 593JxS79_to: Downloading webpage
+2026-09-03 19:23:08,487 - DEBUG - [youtube] 593JxS79_to: Downloading android vr player API JSON
+2026-09-03 19:23:08,753 - DEBUG - [youtube] Extracting URL: https://www.youtube.com/shorts/593JxS79_to
+2026-09-03 19:23:08,753 - DEBUG - [youtube] 593JxS79_to: Downloading webpage
+2026-09-03 19:23:10,067 - DEBUG - [youtube] 593JxS79_to: Downloading android vr player API JSON
+2026-09-03 19:23:10,247 - DEBUG - [info] 593JxS79_to: Downloading 1 format(s): 398+140
+2026-09-03 19:23:10,294 - DEBUG - [download] Destination: You Aint Nothing But a Hound Dog_20260903_192307.f398.mp4
+2026-09-03 19:23:10,294 - DEBUG - [download]   0.0% of    4.53MiB at  Unknown B/s ETA Unknown
+2026-09-03 19:23:10,295 - DEBUG - [download]   0.1% of    4.53MiB at  Unknown B/s ETA Unknown
+2026-09-03 19:23:10,295 - DEBUG - [download]   0.2% of    4.53MiB at  Unknown B/s ETA Unknown
+2026-09-03 19:23:10,295 - DEBUG - [download]   0.3% of    4.53MiB at   13.75MiB/s ETA 00:00
+2026-09-03 19:23:10,300 - DEBUG - [download]   0.7% of    4.53MiB at    4.94MiB/s ETA 00:00
+2026-09-03 19:23:10,306 - DEBUG - [download]   1.4% of    4.53MiB at    4.99MiB/s ETA 00:00
+2026-09-03 19:23:10,314 - DEBUG - [download]   2.7% of    4.53MiB at    6.25MiB/s ETA 00:00
+2026-09-03 19:23:10,319 - DEBUG - [download]   5.5% of    4.53MiB at    9.75MiB/s ETA 00:00
+2026-09-03 19:23:10,328 - DEBUG - [download]  11.0% of    4.53MiB at   14.48MiB/s ETA 00:00
+2026-09-03 19:23:10,338 - DEBUG - [download]  22.0% of    4.53MiB at   22.49MiB/s ETA 00:00
+2026-09-03 19:23:10,350 - DEBUG - [download]  44.1% of    4.53MiB at   35.88MiB/s ETA 00:00
+2026-09-03 19:23:10,370 - DEBUG - [download]  88.2% of    4.53MiB at   52.65MiB/s ETA 00:00
+2026-09-03 19:23:10,376 - DEBUG - [download] 100.0% of    4.53MiB at   55.41MiB/s ETA 00:00
+2026-09-03 19:23:10,377 - DEBUG - [download] 100% of    4.53MiB in 00:00:00 at 36.90MiB/s
+2026-09-03 19:23:10,418 - DEBUG - [download] Destination: You Aint Nothing But a Hound Dog_20260903_192307.f140.m4a
+2026-09-03 19:23:10,418 - DEBUG - [download]   0.2% of  476.60KiB at  Unknown B/s ETA Unknown
+2026-09-03 19:23:10,418 - DEBUG - [download]   0.6% of  476.60KiB at  Unknown B/s ETA Unknown
+2026-09-03 19:23:10,418 - DEBUG - [download]   1.5% of  476.60KiB at    6.35MiB/s ETA 00:00
+2026-09-03 19:23:10,418 - DEBUG - [download]   3.1% of  476.60KiB at   12.27MiB/s ETA 00:00
+2026-09-03 19:23:10,419 - DEBUG - [download]   6.5% of  476.60KiB at   22.34MiB/s ETA 00:00
+2026-09-03 19:23:10,419 - DEBUG - [download]  13.2% of  476.60KiB at   40.60MiB/s ETA 00:00
+2026-09-03 19:23:10,419 - DEBUG - [download]  26.6% of  476.60KiB at   72.62MiB/s ETA 00:00
+2026-09-03 19:23:10,420 - DEBUG - [download]  53.5% of  476.60KiB at   91.52MiB/s ETA 00:00
+2026-09-03 19:23:10,423 - DEBUG - [download] 100.0% of  476.60KiB at   75.68MiB/s ETA 00:00
+2026-09-03 19:23:10,425 - DEBUG - [download] 100% of  476.60KiB in 00:00:00 at 9.81MiB/s
+2026-09-03 19:23:10,428 - DEBUG - [Merger] Merging formats into "You Aint Nothing But a Hound Dog_20260903_192307.mp4"
+2026-09-03 19:23:10,484 - DEBUG - Deleting original file You Aint Nothing But a Hound Dog_20260903_192307.f140.m4a (pass -k to keep)
+2026-09-03 19:23:10,484 - DEBUG - Deleting original file You Aint Nothing But a Hound Dog_20260903_192307.f398.mp4 (pass -k to keep)
