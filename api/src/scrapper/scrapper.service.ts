@@ -1,14 +1,21 @@
-import {BadRequestException, ConflictException, Injectable, Logger, NotFoundException} from '@nestjs/common';
+import { BadRequestException, Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
-import type { Page } from "puppeteer";
-import {Comment, List, Post, Pinned, PostInList, ComemntInList} from "./entities/scrapper.entity";
-import {InjectRepository} from '@nestjs/typeorm';
-import {IsNull, Not, Repository, In, PrimaryColumn, ManyToOne, JoinColumn} from 'typeorm';
 import path from "node:path";
 import * as fs from "node:fs";
 import { randomUUID } from "node:crypto";
 import {spawn} from "node:child_process";
+import { NodePgDatabase } from 'drizzle-orm/node-postgres';
+
+import * as schema from '../db/schema';
+import { and, count, desc, eq, inArray, isNotNull } from 'drizzle-orm';
+
+const posts = schema.posts;
+const comments = schema.comments;
+const lists = schema.lists;
+const list_posts = schema.list_posts;
+const list_comments = schema.list_comments;
+const pinned = schema.pinned;
 
 
 interface ExtractedPostDetails {
@@ -21,38 +28,22 @@ interface ExtractedPostDetails {
   imageUrl: string | null;
 }
 
+type PostRow = typeof schema.posts.$inferSelect;
+type CommentRow = typeof schema.comments.$inferSelect;
+
 @Injectable()
 export class ScrapperService {
   private readonly logger = new Logger(ScrapperService.name);
 
   constructor(
-      @InjectRepository(Post)private readonly postRepository: Repository<Post>,
-      @InjectRepository(Comment)private readonly commentRepository: Repository<Comment>,
-      @InjectRepository(List)private readonly listRepository: Repository<List>,
-      @InjectRepository(PostInList)private readonly postInListRepository: Repository<PostInList>,
-      @InjectRepository(ComemntInList)private readonly commentInListRepository: Repository<ComemntInList>,
-      @InjectRepository(Pinned)private readonly pinnedRepository: Repository<Pinned>,
+      @Inject('DRIZZLE_DB') private db: NodePgDatabase<typeof schema>,
+  ) {}
 
-  ) {
-  }
 
 
 
 
   /*---------------------------------------------------------------------FUNKCIJE--------------------------------------------------------------------------*/
-  private async extractPostDetails(page: Page): Promise<ExtractedPostDetails> {
-    return page.evaluate(() => {
-      const post = document.querySelector('shreddit-post');
-      const id = post?.attributes['id']?.value;
-      const title = post?.attributes['post-title']?.value;
-      const content = post?.querySelector('p')?.textContent?.trim() || '';
-      const author = post?.attributes['author']?.value;
-      const url = post?.attributes['content-href']?.value;
-      const subreddit = post?.attributes['subreddit-prefixed-name']?.value.split('/')[1];
-      const imageUrl = post?.querySelector('img[id="post-image"]')?.attributes['src']?.value || "";
-      return { id, title, content, author, url, subreddit, imageUrl };
-    });
-  }
 
   private async savePostImage(imageUrl: string, postId: string): Promise<string> {
     const imageDir = path.join(process.cwd(), 'public', 'post_images');
@@ -175,9 +166,9 @@ export class ScrapperService {
 
     try {
       if (arg_postType === 'post') {
-        await this.postInListRepository.insert({listId: Number(arg_ListID), postId: arg_SaveID});
+        await this.db.insert(schema.list_posts).values({ list_id: Number(arg_ListID), post_id: arg_SaveID });
       }else if(arg_postType === 'comment'){
-        await this.commentInListRepository.insert({listId: Number(arg_ListID), commentId: arg_SaveID});
+        await this.db.insert(schema.list_comments).values({ list_id: Number(arg_ListID), comment_id: arg_SaveID });
       }
 
       return {
@@ -195,9 +186,21 @@ export class ScrapperService {
 
     try {
       if (arg_postType === 'post') {
-        await this.postInListRepository.delete({listId: Number(arg_ListID), postId: arg_SaveID});
-      }else if(arg_postType === 'comment'){
-        await this.commentInListRepository.delete({listId: Number(arg_ListID), commentId: arg_SaveID});
+        await this.db.delete(list_posts)
+          .where(
+              and(
+                  eq(list_posts.list_id, Number(arg_ListID)),
+                  eq(list_posts.post_id, arg_SaveID),
+              )
+          );
+      } else if (arg_postType === 'comment') {
+        await this.db.delete(list_comments)
+          .where(
+              and(
+                  eq(list_comments.list_id, Number(arg_ListID)),
+                  eq(list_comments.comment_id, arg_SaveID),
+              ),
+          );
       }
 
       return {
@@ -217,10 +220,12 @@ export class ScrapperService {
     }
 
     try {
-      await this.listRepository.insert({ name: arg_ListName });
+      await this.db.insert(lists)
+          .values({ name: arg_ListName });
+
       this.logger.log('List created successfully: ' + arg_ListName);
-      return await this.listRepository.findOne({ where: { name: arg_ListName } });
-    }catch (error) {
+      return await this.db.select().from(lists).where(eq(lists.name, arg_ListName));
+    } catch (error) {
       throw new BadRequestException('Failed to create list: ' + error.message);
     }
   }
@@ -232,22 +237,22 @@ export class ScrapperService {
 
     try {
       if (isPostOrComment === 'post') {
-        const foundPin = await this.pinnedRepository.findOne({where: { post_id: arg_SaveID },});
+        const [foundPin] = await this.db.select().from(pinned).where(eq(pinned.post_id, arg_SaveID)).limit(1);
         if (foundPin) {
-          await this.pinnedRepository.delete({ post_id: arg_SaveID });
+          await this.db.delete(pinned).where(eq(pinned.post_id, arg_SaveID));
           return {
             message: 'Post is unpinned',
           };
         }
 
-        const count = await this.pinnedRepository.count();
-        if (count > 3) {
+        const [pinCount] = await this.db.select({ value: count() }).from(pinned);
+        if (Number(pinCount?.value ?? 0) > 3) {
           return {
             message: 'Maximum number of pins reached',
           };
         }
 
-        await this.pinnedRepository.save({post_id: arg_SaveID});
+        await this.db.insert(pinned).values({ post_id: arg_SaveID });
 
         return {
           message: 'Post pinned successfully',
@@ -255,22 +260,22 @@ export class ScrapperService {
       }
 
       if (isPostOrComment === 'comment') {
-        const foundPin = await this.pinnedRepository.findOne({where: { comment_id: arg_SaveID },});
+        const [foundPin] = await this.db.select().from(pinned).where(eq(pinned.comment_id, arg_SaveID)).limit(1);
         if (foundPin) {
-          await this.pinnedRepository.delete({ comment_id: arg_SaveID });
+          await this.db.delete(pinned).where(eq(pinned.comment_id, arg_SaveID));
           return {
             message: 'Comment is already pinned',
           };
         }
 
-        const count = await this.pinnedRepository.count();
-        if (count > 3) {
+        const [pinCount] = await this.db.select({ value: count() }).from(pinned);
+        if (Number(pinCount?.value ?? 0) > 3) {
           return {
             message: 'Maximum number of pins reached',
           };
         }
 
-        await this.pinnedRepository.save({comment_id: arg_SaveID,});
+        await this.db.insert(pinned).values({ comment_id: arg_SaveID });
 
         return {
           message: 'Comment pinned successfully',
@@ -401,7 +406,18 @@ export class ScrapperService {
         }, arg_URL);
 
 
-        const post = await this.extractPostDetails(page);
+        const post = await page.evaluate(() => {
+          const post = document.querySelector('shreddit-post');
+          const id = post?.attributes['id']?.value;
+          const title = post?.attributes['post-title']?.value;
+          const content = post?.querySelector('p')?.textContent?.trim() || '';
+          const author = post?.attributes['author']?.value;
+          const url = post?.attributes['content-href']?.value;
+          const subreddit = post?.attributes['subreddit-prefixed-name']?.value.split('/')[1];
+          const imageUrl = post?.querySelector('img[id="post-image"]')?.attributes['src']?.value || "";
+          return { id, title, content, author, url, subreddit, imageUrl };
+        }, arg_URL);
+
 
         if (!comment.author) throw new Error('Failed to extract AUTHOR from COMMENT');
         if (!comment.content) throw new Error('Failed to extract CONTENT from COMMENT');
@@ -419,9 +435,13 @@ export class ScrapperService {
         const storedContent = post.content || 'Post is an image';
 
 
-        const existingComment = await this.commentRepository.findOne({where: { id: comment.commentId}});
+        const existingComment = await this.db
+          .select()
+          .from(comments)
+          .where(eq(comments.id, comment.commentId))
+          .limit(1);
 
-        if (existingComment === null) {
+        if (existingComment.length > 0) {
           return {
             status: "alert",
             message: 'Comment is already saved',
@@ -429,8 +449,26 @@ export class ScrapperService {
           };
         }
 
-        await this.postRepository.save({ id: post.id, manual_save: false, author: post.author, title: post.title, content: storedContent, image_path: imagePath, url: post.url, subreddit: post.subreddit });
-        await this.commentRepository.insert({ id: comment.commentId, manual_save: true, post: { id: comment.postId }, author: comment.author, content: comment.content, url: comment.url, subreddit: comment.subreddit });
+        await this.db.insert(posts).values({
+          id: post.id,
+          manual_save: false,
+          author: post.author,
+          title: post.title,
+          content: storedContent,
+          image_path: imagePath,
+          url: post.url,
+          subreddit: post.subreddit,
+        });
+        await this.db.insert(comments).values({
+          id: comment.commentId,
+          manual_save: true,
+          parent_id: comment.postId,
+          post_id: comment.postId,
+          author: comment.author,
+          content: comment.content,
+          url: comment.url,
+          subreddit: comment.subreddit,
+        });
         this.logger.warn('Comment added successfully (HTML fallback)');
         this.logger.warn('Post added successfully (HTML fallback)');
 
@@ -442,7 +480,17 @@ export class ScrapperService {
         };
       /*---------------------------POST---------------------------*/
       }else {
-        const post = await this.extractPostDetails(page);
+        const post = await page.evaluate(() => {
+          const post = document.querySelector('shreddit-post');
+          const id = post?.attributes['id']?.value;
+          const title = post?.attributes['post-title']?.value;
+          const content = post?.querySelector('p')?.textContent?.trim() || '';
+          const author = post?.attributes['author']?.value;
+          const url = post?.attributes['content-href']?.value;
+          const subreddit = post?.attributes['subreddit-prefixed-name']?.value.split('/')[1];
+          const imageUrl = post?.querySelector('img[id="post-image"]')?.attributes['src']?.value || "";
+          return { id, title, content, author, url, subreddit, imageUrl };
+        }, arg_URL);
 
         if (!post.id) throw new Error('Failed to extract ID from POST');
         if (!post.title) throw new Error('Failed to extract TITLE from POST');
@@ -453,10 +501,14 @@ export class ScrapperService {
         const imagePath = !post.content && post.imageUrl ? await this.savePostImage(post.imageUrl, post.id) : null;
         const storedContent = post.content || 'Post is an image';
 
-        const existingPost = await this.postRepository.findOne({where: { id: post.id, manual_save: true }});
+        const existingPost = await this.db
+          .select()
+          .from(posts)
+          .where(and(eq(posts.id, post.id), eq(posts.manual_save, true)))
+          .limit(1);
 
-        if (existingPost) {
-          this.logger.warn(existingPost.id);
+        if (existingPost.length > 0) {
+          this.logger.warn(existingPost[0].id);
           return {
             status: "alert",
             message: 'Post is already saved',
@@ -464,7 +516,16 @@ export class ScrapperService {
           };
         }
 
-        await this.postRepository.save({ id: post.id, manual_save: true, author: post.author, title: post.title, content: storedContent, image_path: imagePath, url: post.url, subreddit: post.subreddit });
+        await this.db.insert(posts).values({
+          id: post.id,
+          manual_save: true,
+          author: post.author,
+          title: post.title,
+          content: storedContent,
+          image_path: imagePath,
+          url: post.url,
+          subreddit: post.subreddit,
+        });
         this.logger.log('Post added successfully (HTML fallback): ' + post.title);
 
         return {
@@ -497,51 +558,43 @@ export class ScrapperService {
   /*---------------------------------------------------------------------READ--------------------------------------------------------------------------*/
 
   async findPosts(pageType: string) {
-    const manual_save = pageType === 'savesPage' || pageType === 'homePage' ? { manual_save: true } : undefined;
     this.logger.log("pageType: " + pageType);
 
-    const posts = await this.postRepository.find({
-      order: { date_added: 'DESC' },
-      where: manual_save
-    });
+    const result = pageType === 'savesPage' || pageType === 'homePage'
+      ? await this.db.select().from(posts).where(eq(posts.manual_save, true)).orderBy(desc(posts.date_added))
+      : await this.db.select().from(posts).orderBy(desc(posts.date_added));
 
-    if (!posts) {
+    if (!result) {
       throw new NotFoundException('Objave nije moguće dohvatiti.');
     }
 
     if (pageType === 'savesPage' || pageType === 'homePage') {
-      return posts.slice(0, 4);
-    }else {
-      return posts;
+      return result.slice(0, 4);
+    } else {
+      return result;
     }
   }
 
 
 
   async findComments(pageType: string) {
-    const manual_save = pageType === 'savesPage' || pageType === 'homePage' ? { manual_save: true } : undefined;
+    const result = pageType === 'savesPage' || pageType === 'homePage'
+      ? await this.db.select().from(comments).where(eq(comments.manual_save, true)).orderBy(desc(comments.date_added))
+      : await this.db.select().from(comments).orderBy(desc(comments.date_added));
 
-    const comments = await this.commentRepository.find({
-      where: manual_save,
-      order: {date_added: 'DESC'}
-    });
-    if (!comments) {
+    if (!result) {
       throw new NotFoundException('Komentare nije moguće dohvatiti.');
     }
 
     if (pageType === 'savesPage' || pageType === 'homePage') {
-      return comments.slice(0, 4);
-    }else {
-      return comments;
+      return result.slice(0, 4);
+    } else {
+      return result;
     }
   }
 
   async findLists() {
-    const lists = await this.listRepository.find({
-      order: { date_added: 'DESC' },
-    });
-
-    return lists;
+    return await this.db.select().from(lists).orderBy(desc(lists.date_added));
   }
 
 
@@ -551,52 +604,41 @@ export class ScrapperService {
 
     let postIDs: string[] = [];
     let commentIDs: string[] = [];
-    let posts: Post[] = [];
-    let comments: Comment[] = [];
+    let foundPosts: PostRow[] = [];
+    let foundComments: CommentRow[] = [];
 
     switch (pageType) {
       case 'listPage':
-        const postInLists = await this.postInListRepository.find({
-          where: { listId: Number(listID) },
-        });
-        const commentInLists = await this.commentInListRepository.find({
-          where: { listId: Number(listID) },
-        });
+        const postInLists = await this.db
+          .select({ postId: list_posts.post_id })
+          .from(list_posts)
+          .where(eq(list_posts.list_id, Number(listID)));
+        const commentInLists = await this.db
+          .select({ commentId: list_comments.comment_id })
+          .from(list_comments)
+          .where(eq(list_comments.list_id, Number(listID)));
 
-        postIDs = postInLists.map((p) => p.postId);
-        commentIDs = commentInLists.map((c) => c.commentId);
+        postIDs = postInLists.map((p) => p.postId).filter((id): id is string => Boolean(id));
+        commentIDs = commentInLists.map((c) => c.commentId).filter((id): id is string => Boolean(id));
 
-        posts = await this.postRepository.find({
-          where: { id: In(postIDs) },
-          order: {
-            date_added: 'DESC',
-          },
-        });
-        comments = await this.commentRepository.find({
-          where: { id: In(commentIDs) },
-          order: {
-            date_added: 'DESC',
-          },
-        });
+        foundPosts = postIDs.length > 0
+          ? await this.db.select().from(posts).where(inArray(posts.id, postIDs)).orderBy(desc(posts.date_added))
+          : [];
+        foundComments = commentIDs.length > 0
+          ? await this.db.select().from(comments).where(inArray(comments.id, commentIDs)).orderBy(desc(comments.date_added))
+          : [];
         break;
       default:
-        const manual_save = pageType === 'savesPage' || pageType === 'homePage' ? { manual_save: true } : undefined;
-
-        posts = await this.postRepository.find({
-          where: manual_save,
-          order: {
-            date_added: 'DESC',
-          },
-        });
-        comments = await this.commentRepository.find({
-          where: manual_save,
-          order: {
-            date_added: 'DESC',
-          },
-        });
+        if (pageType === 'savesPage' || pageType === 'homePage') {
+          foundPosts = await this.db.select().from(posts).where(eq(posts.manual_save, true)).orderBy(desc(posts.date_added));
+          foundComments = await this.db.select().from(comments).where(eq(comments.manual_save, true)).orderBy(desc(comments.date_added));
+        } else {
+          foundPosts = await this.db.select().from(posts).orderBy(desc(posts.date_added));
+          foundComments = await this.db.select().from(comments).orderBy(desc(comments.date_added));
+        }
     }
 
-    const results = [...posts, ...comments].sort(
+    const results = [...foundPosts, ...foundComments].sort(
         (a, b) => b.date_added.getTime() - a.date_added.getTime(),
     );
 
@@ -609,40 +651,34 @@ export class ScrapperService {
 
 
   async findPinned() {
-    const postIDs = await this.pinnedRepository.find({
-      where: { post_id: Not(IsNull()) },
-    });
-    const commentIDs = await this.pinnedRepository.find({
-      where: { comment_id: Not(IsNull()) },
-    });
+    const postIDs = await this.db.select({ post_id: pinned.post_id }).from(pinned).where(isNotNull(pinned.post_id));
+    const commentIDs = await this.db.select({ comment_id: pinned.comment_id }).from(pinned).where(isNotNull(pinned.comment_id));
+    const pinnedPostIds = postIDs.flatMap((p) => (p.post_id ? [p.post_id] : []));
+    const pinnedCommentIds = commentIDs.flatMap((c) => (c.comment_id ? [c.comment_id] : []));
 
-    const posts = await this.postRepository.find({
-      where: { id: In(postIDs.map((p) => p.post_id)) },
-      order: {date_added: 'DESC'}
-    });
-    const comments = await this.commentRepository.find({
-      where: { id: In(commentIDs.map((c) => c.comment_id)) },
-      order: {date_added: 'DESC'}
-    });
+    const foundPosts = pinnedPostIds.length > 0
+      ? await this.db.select().from(posts).where(inArray(posts.id, pinnedPostIds)).orderBy(desc(posts.date_added))
+      : [];
+    const foundComments = pinnedCommentIds.length > 0
+      ? await this.db.select().from(comments).where(inArray(comments.id, pinnedCommentIds)).orderBy(desc(comments.date_added))
+      : [];
 
-    if (!comments || !posts) {
+    if (!foundComments || !foundPosts) {
       throw new NotFoundException('Komentare nije moguće dohvatiti.');
     }
 
-    return [...posts, ...comments].sort((a, b) => b.date_added.getTime() - a.date_added.getTime());
+    return [...foundPosts, ...foundComments].sort((a, b) => b.date_added.getTime() - a.date_added.getTime());
   }
 
   async findPinnedIDs() {
-    const pinned = await this.pinnedRepository.find({});
-    return pinned.map((p) => p.post_id);
+    const pinnedRows = await this.db.select().from(pinned);
+    return pinnedRows.map((p) => p.post_id).filter((id): id is string => Boolean(id));
   }
 
 
 
   async findOnePost(id: string) {
-    const post = await this.postRepository.findOne({
-      where: { id }
-    });
+    const [post] = await this.db.select().from(posts).where(eq(posts.id, id)).limit(1);
 
     if (!post) throw new NotFoundException('Objava nije pronađena.');
 
@@ -651,9 +687,7 @@ export class ScrapperService {
 
 
   async findOneComment(id: string) {
-    const comment = await this.commentRepository.findOne({
-      where: { id }
-    });
+    const [comment] = await this.db.select().from(comments).where(eq(comments.id, id)).limit(1);
 
     if (!comment) throw new NotFoundException('Komentar nije pronađen.');
 
@@ -662,9 +696,7 @@ export class ScrapperService {
 
 
   async findOneList(id: number) {
-    const list = await this.listRepository.findOne({
-      where: { id }
-    });
+    const [list] = await this.db.select().from(lists).where(eq(lists.id, id)).limit(1);
 
     if (!list) throw new NotFoundException('Lista nije pronađena.');
 
@@ -678,18 +710,15 @@ export class ScrapperService {
       listIds: number[];
     }[] = [];
 
-    const saves = await this.postRepository.find({
-      where: {
-        id: In(arg_postIDs),
-      },
-    });
+    const saves = arg_postIDs.length > 0
+      ? await this.db.select().from(posts).where(inArray(posts.id, arg_postIDs))
+      : [];
 
     for (const save of saves) {
-      const listsOfThatSave = await this.postInListRepository.find({
-        where: {
-          postId: save.id,
-        },
-      });
+      const listsOfThatSave = await this.db
+        .select({ listId: list_posts.list_id })
+        .from(list_posts)
+        .where(eq(list_posts.post_id, save.id));
 
       arrayOfSavesWithTheirLists.push({
         postId: save.id,
@@ -720,29 +749,29 @@ export class ScrapperService {
   async deleteSave(arg_SaveID: string, arg_saveType: string, arg_withCommentsAlso?: string): Promise<{ message: string }> {
     try {
       this.logger.warn(`Args: ${arg_SaveID}, ${arg_saveType}, ${arg_withCommentsAlso}`);
-      const commentsWithDeletedPostID = await this.commentRepository.find({where: { post_id: arg_SaveID },});
+      const commentsWithDeletedPostID = await this.db.select().from(comments).where(eq(comments.post_id, arg_SaveID));
 
       if (arg_withCommentsAlso === 'true') {
-        await this.commentRepository.delete({post_id: arg_SaveID});
-        await this.postRepository.delete({ id: arg_SaveID });
+        await this.db.delete(comments).where(eq(comments.post_id, arg_SaveID));
+        await this.db.delete(posts).where(eq(posts.id, arg_SaveID));
 
         return {
           message: `${arg_saveType} deleted successfully`,
         };
       }
 
-      if(arg_saveType === 'post' && commentsWithDeletedPostID.length > 0){
+      if (arg_saveType === 'post' && commentsWithDeletedPostID.length > 0) {
         this.logger.warn(`Returning message`);
         return {
           message: `The post already has saved comments tied to it`
         };
-      }else if (arg_saveType === 'post' && commentsWithDeletedPostID.length === 0){
+      } else if (arg_saveType === 'post' && commentsWithDeletedPostID.length === 0) {
         this.logger.warn(`Deleting post ${arg_saveType} with ID: ${arg_SaveID}`);
-        await this.postRepository.delete({ id: arg_SaveID });
+        await this.db.delete(posts).where(eq(posts.id, arg_SaveID));
       }
       else {
         this.logger.error(`Deleting comment ${arg_saveType} with ID: ${arg_SaveID}`);
-        await this.commentRepository.delete({ id: arg_SaveID });
+        await this.db.delete(comments).where(eq(comments.id, arg_SaveID));
       }
 
 
@@ -758,7 +787,7 @@ export class ScrapperService {
 
   async deleteList(arg_ListID: string): Promise<{ message: string }> {
     try {
-      await this.listRepository.delete({ id: Number(arg_ListID) });
+      await this.db.delete(lists).where(eq(lists.id, Number(arg_ListID)));
       return {
         message: 'List deleted successfully',
       };

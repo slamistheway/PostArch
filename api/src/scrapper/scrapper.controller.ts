@@ -1,7 +1,6 @@
 import {Controller, Get, Post, Body, Patch, Param, Delete, Logger, Query} from '@nestjs/common';
 import { ScrapperService } from './scrapper.service';
-import puppeteer from 'puppeteer';
-import {In} from "typeorm";
+
 
 
 @Controller('scrapper')

@@ -1,14 +1,13 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { ScrapperService } from './scrapper.service';
 import { ScrapperController } from './scrapper.controller';
-import {Post, Comment, List, PostInList, ComemntInList, Pinned} from './entities/scrapper.entity';
+import { DrizzleModule } from '../db/drizzle/drizzle.module';
+import {NodePgDatabase} from "drizzle-orm/node-postgres";
 
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Post, Comment, List, PostInList, ComemntInList, Pinned])],
-  controllers: [ScrapperController],
+  imports: [DrizzleModule],
   providers: [ScrapperService],
-
+  controllers: [ScrapperController],
 })
 export class ScrapperModule {}
