@@ -4,6 +4,7 @@ import * as schema from '../schema';
 import dotenv from "dotenv";
 
 dotenv.config({path: ".env",});
+
 export const DRIZZLE_DB = 'DRIZZLE_DB';
 
 export const drizzleProvider = [

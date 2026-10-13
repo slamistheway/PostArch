@@ -11,11 +11,13 @@ import { DrizzleModule } from './db/drizzle/drizzle.module';
     DrizzleModule,
     ScrapperModule,
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'public'),
+      rootPath: join(process.cwd(), 'public'),
+      serveStaticOptions: { index: false },
     }),
   ],
   controllers: [AppController],
   providers: [AppService],
+  exports: [AppService]
 })
 export class AppModule {}
 

@@ -28,6 +28,11 @@ export class ScrapperController {
     return this.scrapperService.findLists();
   }
 
+  @Get('saveLists/:type/:id')
+  findSaveLists(@Param('type') type: string, @Param('id') id: string) {
+    return this.scrapperService.findSaveListIds(type, id);
+  }
+
   @Get('all')
   findAll(@Query('pageType') pageType: string, @Query('listID') listID: string) {
     return this.scrapperService.findAll(pageType, listID);

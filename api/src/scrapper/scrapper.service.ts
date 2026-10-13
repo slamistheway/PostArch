@@ -166,9 +166,9 @@ export class ScrapperService {
 
     try {
       if (arg_postType === 'post') {
-        await this.db.insert(schema.list_posts).values({ list_id: Number(arg_ListID), post_id: arg_SaveID });
+        await this.db.insert(schema.list_posts).values({ list_id: Number(arg_ListID), post_id: arg_SaveID }).onConflictDoNothing();
       }else if(arg_postType === 'comment'){
-        await this.db.insert(schema.list_comments).values({ list_id: Number(arg_ListID), comment_id: arg_SaveID });
+        await this.db.insert(schema.list_comments).values({ list_id: Number(arg_ListID), comment_id: arg_SaveID }).onConflictDoNothing();
       }
 
       return {
@@ -248,7 +248,7 @@ export class ScrapperService {
         const [pinCount] = await this.db.select({ value: count() }).from(pinned);
         if (Number(pinCount?.value ?? 0) > 3) {
           return {
-            message: 'Maximum number of pins reached',
+            message: 'Maximum number of pinned posts and comments (4) reached.',
           };
         }
 
@@ -264,14 +264,14 @@ export class ScrapperService {
         if (foundPin) {
           await this.db.delete(pinned).where(eq(pinned.comment_id, arg_SaveID));
           return {
-            message: 'Comment is already pinned',
+            message: 'Comment is unpinned',
           };
         }
 
         const [pinCount] = await this.db.select({ value: count() }).from(pinned);
         if (Number(pinCount?.value ?? 0) > 3) {
           return {
-            message: 'Maximum number of pins reached',
+            message: 'Maximum number of pinned posts and comments (4) reached.',
           };
         }
 
@@ -391,7 +391,7 @@ export class ScrapperService {
         }
 
       /*---------------------------COMMENT---------------------------*/
-      if (arg_URL.includes('/comment/')) {
+      if (/\/comment\/[^/]+(?:\/|$)|\/comments\/[^/]+\/[^/]+\/[^/]+(?:\/|$)/i.test(new URL(arg_URL).pathname)) {
         this.logger.log("Saving comment...");
 
         const comment = await page.evaluate(() => {
@@ -458,7 +458,7 @@ export class ScrapperService {
           image_path: imagePath,
           url: post.url,
           subreddit: post.subreddit,
-        });
+        }).onConflictDoNothing();
         await this.db.insert(comments).values({
           id: comment.commentId,
           manual_save: true,
@@ -477,6 +477,8 @@ export class ScrapperService {
           message: 'Post and comment added successfully',
           title: comment.author,
           content: comment.content,
+          comment_id: comment.commentId,
+          post_id: post.id,
         };
       /*---------------------------POST---------------------------*/
       }else {
@@ -525,7 +527,7 @@ export class ScrapperService {
           image_path: imagePath,
           url: post.url,
           subreddit: post.subreddit,
-        });
+        }).onConflictDoUpdate({ target: posts.id, set: { manual_save: true } });
         this.logger.log('Post added successfully (HTML fallback): ' + post.title);
 
         return {
@@ -595,6 +597,18 @@ export class ScrapperService {
 
   async findLists() {
     return await this.db.select().from(lists).orderBy(desc(lists.date_added));
+  }
+
+  async findSaveListIds(type: string, id: string): Promise<number[]> {
+    if (!id || (type !== 'post' && type !== 'comment')) {
+      throw new BadRequestException('A post or comment ID is required.');
+    }
+    if (type === 'post') {
+      const rows = await this.db.select({ listId: list_posts.list_id }).from(list_posts).where(eq(list_posts.post_id, id));
+      return rows.map((row) => row.listId);
+    }
+    const rows = await this.db.select({ listId: list_comments.list_id }).from(list_comments).where(eq(list_comments.comment_id, id));
+    return rows.map((row) => row.listId);
   }
 
 
@@ -672,7 +686,8 @@ export class ScrapperService {
 
   async findPinnedIDs() {
     const pinnedRows = await this.db.select().from(pinned);
-    return pinnedRows.map((p) => p.post_id).filter((id): id is string => Boolean(id));
+    return pinnedRows.flatMap((row) => [row.post_id, row.comment_id])
+      .filter((id): id is string => Boolean(id));
   }
 
 

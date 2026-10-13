@@ -33,7 +33,7 @@ function Navbar() {
           {/* SEARCH INPUT */}
           <input
             type="text"
-            placeholder="Pretraži objave i komentare"
+            placeholder="Pretraži objave i komentare:"
             className="z-5 w-full flex-1 rounded-full pl-8 text-2xl outline-none placeholder:text-gray-500"
           />
         </div>
